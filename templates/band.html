@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Name}}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e6c4a8;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px; 
+        }
+
+        .bands {
+            display: flex;
+            justify-content: center;
+        }
+
+        .band-info {
+            text-align: left;
+            background-color: #f2d6b2;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .band-info img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #965000;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #794900;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #794500;
+            padding-bottom: 5px;
+        }
+
+        ul, ol {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        strong {
+            color: #692f00;
+        }
+
+       
+        .section {
+            margin-top: 20px;
+        }
+.ok {
+ padding: 0.8em 1.8em;
+ border: 2px solid #c37317;
+ position: relative;
+ overflow: hidden;
+ background-color: transparent;
+ text-align: center;
+ text-transform: uppercase;
+ font-size: 16px;
+ transition: .3s;
+ z-index: 1;
+ font-family: inherit;
+ color: #c37917;
+}
+
+.ok::before {
+ content: '';
+ width: 0;
+ height: 100%;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%) ;
+ background: #c38d17;
+ transition: .5s ease;
+ display: block;
+ z-index: -1;
+}
+
+.ok:hover::before {
+ width: 105%;
+}
+.ok:hover {
+ color: #111;
+}
+::-webkit-scrollbar {
+    width: 10px; 
+    background-color: #dfaf78; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffaf54; 
+    border-radius: 6px; 
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ffffff; 
+    border-radius: 6px; 
+}
+        
+    </style>
+</head>
+<body>
+   <div>
+        <a  class="ok" href="../">GO BACK</a>
+    </div>
+     <h1>{{.Name}}</h1>
+    
+    
+
+    <div class="bands">
+        <div class="band-info">
+            <img src="{{.Image}}" alt="{{.Name}} Image" width="200px">
+
+            <div class="section">
+                <h3>Members:</h3>
+                <ul>
+                    {{range .Members}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            </div>
+
+            <div class="section">
+                <p><strong>Creation Date:</strong> {{.CreationDate}}</p>
+                <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+            </div>
+
+            <div class="section">
+                <h3>Relations:</h3>
+                {{range $key, $value := .Relation.DatesLocations}}
+                <ul>
+                    <li><strong>{{$key}}:</strong></li>
+                    {{range $value}}
+                        <ul>
+                            <li>{{.}}</li>
+                        </ul>
+                    {{end}}
+                </ul>
+                {{end}}
+            </div>
+
+            <div class="section">
+                <h3>Locations:</h3>
+                <ol>
+                    {{range .Location.Locations}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ol>
+            </div>
+            <div>
+                <h3>Dates:</h3>
+                <ol>
+                {{range .Date.Dates}}
+                <li>{{.}}</li>
+                {{end}}
+                </ol>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
